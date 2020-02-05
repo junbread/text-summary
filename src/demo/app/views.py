@@ -9,6 +9,6 @@ def demo(request):
     else:
         document = request.POST['document']
         answer = request.POST['answer']
-        summary = summarize(document)
+        summary = summarize.summarize(document)['pgn']
 
     return render(request, 'demo.html', {'summary': summary, 'document': document, 'answer': answer})
