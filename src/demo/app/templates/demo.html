@@ -2,8 +2,7 @@
 <html>
     <head>
         <title>NLG 테스트 페이지</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
     </head>
     <body>
@@ -12,22 +11,54 @@
             <h1>NLG 테스트 페이지</h1>
             <h2>pointer-generator-network</h2>
         </div>
-        <form class="form" action="/" method="post">
+        <form class="form1" action="/" method="post">
             <div class="form-group">
                 <label for="document">Document</label>
-                <textarea id="document" class="form-control" name="document">{{ document }}</textarea>
+                <textarea id="document" class="form-control form-control-" name="document">{{ document }}</textarea>
             </div>
-            <div class="form-group">
-                <label for="answer">Answer</label>
-                <textarea id="answer" class="form-control" name="answer">{{ answer }}</textarea>
-            </div>
+
             <div class="form-group text-center">
                 <button class="btn btn-primary" type="submit">Summarize</button>
             </div>
+        </form>
+        <h1></h1>
+        {% if summary %}
+        <form class="form2" action="/eval" method="post">
             <div class="form-group">
                 <label for="summary">Summary</label>
-                <div id="summary" class="form-control input-group" readonly>{{ summary }}</div>
+                <div id="summary" class="form-control input-group">{{ summary }}</div>
+                <input name="sum" value="{{ summary }}" type="hidden">
+                <input name="doc" value="{{ document }}" type="hidden">
+            </div>
+            <label for="summary">Evaluation</label>
+            <div class="form-group text-center">
+                <span class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="r0" name="eval" value="최악" />
+                    <label for = "r0" class="form-check-label"> 최악</label>
+                </span>
+                <span class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="r1" name="eval" value="미흡" />
+                    <label for = "r1" class="form-check-label"> 미흡</label>
+                </span>
+                <span class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="r2" name="eval" value="보통" checked/>
+                    <label for = "r2" class="form-check-label"> 보통</label>
+                </span>
+                <span class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="r3" name="eval" value="좋음" />
+                    <label for = "r3" class="form-check-label"> 좋음</label>
+                </span>
+                <span class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="r4" name="eval" value="최고" />
+                    <label for = "r4" class="form-check-label"> 최고</label>
+                </span>
+            </div>
+            <label for="summary">Name  </label>
+            <input type="text" id="jb-input-text" name = "name">
+            <div class="form-group text-center">
+                <button class="btn btn-primary" type="submit">Send</button>
             </div>
         </form>
+        {% endif %}
     </body>
 </html>
