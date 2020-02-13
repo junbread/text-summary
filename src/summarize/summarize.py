@@ -1,14 +1,15 @@
 from .preprocess import *
 from .pgn.util import Decoder as PGNDecoder
+from .textrank.util import Decoder as TextrankDecoder
 
-#from .textrank.util import Decoder as TextrankDecoder
 #from .baseline import BaselineDecoder as BaselineDecoder
+
 
 class Summarizer(object):
     def __init__(self):
         init_libraries()
         self.pgn_decoder = PGNDecoder()
-        #self.textrank_decoder = TextrankDecoder()
+        self.textrank_decoder = TextrankDecoder()
 
     def summarize(self, text):
         """return summary of given text"""
@@ -17,8 +18,7 @@ class Summarizer(object):
 
         result = {
             'pgn': self.pgn_decoder.decode(preprocessed_text),
-            'tpgn': '',
-            'bert': ''
+            'textrank': self.textrank_decoder.decode(preprocessed_text)
         }
 
         return result
