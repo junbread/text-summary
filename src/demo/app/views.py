@@ -5,15 +5,36 @@ from .models import Eval
 # from src.summarize import summarize
 
 def demo(request):
+    opt_transformer_checked = None
+    opt_textrank_checked = None
+    summary = None
+    document = None
+    opt_trn = None
+    opt_textrank_checked = None
     if(request.method == 'GET'):
-        summary = ""
+        summary = "##요약이 여기에 표시됩니다!"
         document = ""
+        opt_transformer_checked = "checked"
+        opt_textrank_checked = "checked"
+        trns = 0
+        rnd = 0
     else:
+        trns = False
+        rnd = False
         document = request.POST['document']
-        summary = "summary"
+        summary = "summarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummary"
+        try:
+            if "trans" in request.POST['sum_opt']:
+                opt_transformer_checked = "checked"
+                trns = True
+            if "rnd" in request.POST['sum_opt']:
+                opt_textrank_checked = "checked"
+                rnd = True
+        except:
+            pass
         # summary = summarize.summarize(document)['pgn']
 
-    return render(request, 'demo.html', {'summary': summary, 'document': document})
+    return render(request, 'demo.html', {'summary': summary, 'document': document, 'summary_trns': trns, 'summary_rnd':rnd, 'opt_trns_checked':opt_transformer_checked, 'opt_rnd_checked':opt_textrank_checked})
 def eval(request):
     
     eval_label = request.POST['eval']
