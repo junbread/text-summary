@@ -8,11 +8,14 @@ import time
 import re
 import hanja
 
-def process(article):
+
+def init_libraries():
     try:
         initialize(HNN='LATEST', KHAIII='LATEST')
     except Exception:
         finalize()    
+
+def process(article):
     # remove bylines
     article = re.sub(r'\. *\S+ +\S+ +\w+@(\w+\.)+\w+', '.', article)
     article = re.sub(r'\S+ +\S+ +\w+@(\w+\.)+\w+', '.', article)
@@ -47,8 +50,6 @@ def process(article):
     
     # regularize whitespaces
     article_regularized = re.sub(r' +', ' ', article_regularized)
-
-    finalize()
 
     command = ["java", "edu.stanford.nlp.process.PTBTokenizer", "-preserveLines", "-lowerCase"]
 
