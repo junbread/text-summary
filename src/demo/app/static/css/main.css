@@ -1,12 +1,6 @@
-h1, h2 {
-    font-family: '';
-    margin: 30 auto;
-    text-align: center;
-}
 form {
     /* Just to center the form on the page */
     margin: 0 auto;
-    width: 800px;
     /* To see the outline of the form */
     padding: 1em;
     border: 1px solid #CCC;
@@ -15,49 +9,19 @@ form {
 form div + div {
     margin-top: 1em;
 }
-label {
-    /* To make sure that all label have the same size and are properly align */
-    display: inline-block;
-    width: 200px;
-    text-align: left;
+textarea{
+    vertical-align=top;
+    /* box-sizing: padding-box; */
+    overflow:hidden;
+    /* demo only: */
+    font-size:14px;
+    display:block;
+    border-radius:10px;
+    border:6px solid #556677;
+    resize: none;
 }
-input, textarea {
-    /* To make sure that all text fields have the same font settings
-       By default, textareas have a monospace font */
-    font: 1em sans-serif;
-
-    /* To give the same size to all text field */
-    width: 770px;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-
-    /* To harmonize the look & feel of text field border */
-    border: 1px solid #999;
-}
-input:focus, textarea:focus {
-    /* To give a little highlight on active elements */
-    border-color: #000;
-}
-textarea {
-    /* To properly align multiline text fields with their labels */
-    vertical-align: top;
-
-    /* To give enough room to type some text */
-    height: 5em;
-
-    /* To allow users to resize any textarea vertically
-       It does not work on every browsers */
-    resize: vertical;
-}
-.button {
-    text-align: center;
-    display: block;
-    margin: 20 auto;
-}
-
-button {
-    /* This extra margin represent roughly the same space as the space
-       between the labels and their text fields */
-    margin-left: .5em;
-    width: 160px
+#summary{
+    word-break: break-all;
+    height: auto;
+    word-wrap: break-word;
 }
