@@ -1,8 +1,10 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
-import time
+from django.shortcuts import render, redirect
 from .models import Eval
-# from src.summarize import summarize
+
+from src.summarize.summarize import Summarizer
+
+import time
+summarizer = Summarizer()
 
 def demo(request):
     opt_transformer_checked = None
@@ -22,19 +24,11 @@ def demo(request):
         trns = False
         rnd = False
         document = request.POST['document']
-        summary = "summarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummary"
-        try:
-            if "trans" in request.POST['sum_opt']:
-                opt_transformer_checked = "checked"
-                trns = True
-            if "rnd" in request.POST['sum_opt']:
-                opt_textrank_checked = "checked"
-                rnd = True
-        except:
-            pass
-        # summary = summarize.summarize(document)['pgn']
-
+        answer = request.POST['answer']
+        summary = summarizer.summarize(document)['pgn']
+        
     return render(request, 'demo.html', {'summary': summary, 'document': document, 'summary_trns': trns, 'summary_rnd':rnd, 'opt_trns_checked':opt_transformer_checked, 'opt_rnd_checked':opt_textrank_checked})
+  
 def eval(request):
     
     eval_label = request.POST['eval']

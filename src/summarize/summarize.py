@@ -1,21 +1,24 @@
-from . import preprocess
-from .pgn import util as util_pgn
+from .preprocess import *
+from .pgn.util import Decoder as PGNDecoder
+from .textrank.util import Decoder as TextrankDecoder
 
-def train_model():
-    util_pgn.train()
+#from .baseline import BaselineDecoder as BaselineDecoder
 
-def summarize(text):
-    """return summary of given text"""
 
-    preprocessed_text = preprocess.process(text)
+class Summarizer(object):
+    def __init__(self):
+        init_libraries()
+        self.pgn_decoder = PGNDecoder()
+        self.textrank_decoder = TextrankDecoder()
 
-    result = {
-        'pgn': util_pgn.decode(preprocessed_text),
-        'tpgn': '',
-        'bert': ''
-    }
+    def summarize(self, text):
+        """return summary of given text"""
 
-    return result
-    
-if __name__ == "__main__":
-    test()
+        preprocessed_text = process(text)
+
+        result = {
+            'pgn': self.pgn_decoder.decode(preprocessed_text),
+            'textrank': self.textrank_decoder.decode(preprocessed_text)
+        }
+
+        return result
