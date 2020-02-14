@@ -2,37 +2,50 @@ from django.shortcuts import render, redirect
 from .models import Eval
 
 from src.summarize.summarize import Summarizer
+from src.dataset.util import ExamplePicker
 
 import time
+from pathlib import Path
+
+project_root = Path(__file__).parent.parent.parent.parent
 
 summarizer = Summarizer()
+article_picker = ExamplePicker(data_path = project_root.joinpath('data','original').as_posix())
 
 def demo(request):
     return_object = {
         'article': None,
         'summary': None,
-        'options': []
+        'options': ["pgn", "textrank"]
     }
     
-    if(request.method == 'GET'):
+    if request.method == 'GET':
         article = "" # article selection module
 
-    if(request.method == 'POST'):
-        article = request.POST['article']
+        return_object['article'] = article_picker.pick_random_article()
+
+    if request.method == 'POST':
+        article = request.POST.get('article', '')
+        options = request.POST.getlist('option', [])
         
-        if article is not None:
+        if len(article):
             summary = summarizer.summarize(article)
+
+        return_object['article'] = article
+        return_object['options'] = options
+        return_object['summary'] = summary
 
     return render(request, 'demo.html', return_object)
 
 
 def eval(request):
-
-    eval_record = Eval()
-    eval_record.score = int(request.POST['score'])
-    eval_record.name = request.POST['name']
-    eval_record.sum = request.POST['sum']
-    eval_record.doc = request.POST['doc']
-    eval_record.save()
+    if request.method == 'POST':
+        record = Eval()
+        
+        record.score = request.POST['score']
+        record.name = request.POST['name']
+        record.sum = request.POST['sum']
+        record.doc = request.POST['doc']
+        record.save()
 
     return redirect('demo')

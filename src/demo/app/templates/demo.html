@@ -5,105 +5,114 @@
     <!-- CSS Import -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-    <!--         <link rel="stylesheet" href="{% static 'css/main.css' %}">
- -->
-    <title>Document Summarization Test Page</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>Document Summarization Test</title>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container clearfix">
         <header class="text-center m-5">
             <h1>Document Summarization Test Page</h1>
         </header>
-        <article class="content">
+        <article class="content" style="margin-bottom: 100px">
             <div class="row">
                 <div class="col-6">
-                    <form class="form" action="/" method="post" height="auto">
+                    <div class="form">
                         <div class="form-group">
                             <span class="float-right">
-                                <button class="btn btn-sm btn-primary" type="button" onclick="location.reload()">
-                                    <i class="fa fa-sync"></i>
-                                </button>
+                                <a class="btn btn-sm btn-primary" href="/"><i class="fa fa-sync"></i></a>
                             </span>
                             <h5>Target Article</h5>
-                            <textarea id="article" class="form-control" name="article" draggable="false">{{ article }}</textarea>
+                            <textarea id="article-text" class="form-control-plaintext overflow-hidden" placeholder="Input text here...">{{ article|default_if_none:''}}</textarea>
                         </div>
-                        <div class="form-group">
-                            <h5>Options</h5>
-                            <span class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" name="option" value="pgn" id="option-pgn">
-                                <label class="custom-control-label" for="option-pgn">Pointer-Generator Network (Abstractive)</label>
-                            </span>
-                            <span class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" name="option" value="tpgn" id="option-tpgn">
-                                <label class="custom-control-label" for="option-tpgn">Transformer PGN (Abstractive)</label>
-                            </span>
-                            <span class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" name="option" value="textrank" id="option-textrank">
-                                <label class="custom-control-label" for="option-textrank">Textrank (Extractive)</label>
-                            </span>
-                        </div>
-                        <div class="form-group text-center">
-                            <button class="btn btn-primary" type="submit">Summarize</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
                 <div class="col-6">
-                    <form class="form" action="/eval" method="post">
-                        <input name="sum" value="{{ summary }}" type="hidden">
-                        <input name="doc" value="{{ document }}" type="hidden">
-                        <div class="form-group">
-                            <label for="summary" class="mb-3">Summary</label>
-                            <div id="summary" class="form-control input-group">
-                                {% if summary.pgn is not None %}
-                                    <h6>summary (pointer-generator network)</h6>
-                                    {{ summary.pgn }}
-                                {% endif %}
-                                {% if summary.tpgn is not None %}
-                                    <h6>summary (transformer pgn)</h6>
-                                    {{ summary.pgn }}
-                                {% endif %}
-                                {% if summary.textrank is not None %}
-                                    <h6>summary (textrank)</h6>
-                                    {{ summary.pgn }}
-                                {% endif %}
+                    <div class="form-group">
+                        <h5>Summary</h5>
+                        <div id="summary" class="form-control-plaintext">
+                            {% if summary is None %}
+                            <span>여기에 요약문이 표시됩니다.</span>
+                            {% endif %}
+                            {% if summary.pgn is not None %}
+                            <h6>pointer-generator network</h6>
+                            {{ summary.pgn }}
+                            {% endif %}
+                            {% if summary.tpgn is not None %}
+                            <h6>transformer pgn</h6>
+                            {{ summary.tgpn }}
+                            {% endif %}
+                            {% if summary.textrank is not None %}
+                            <h6>textrank</h6>
+                            {{ summary.textrank }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% if summary is not None %}
+                    <div class="form bg-secondary p-3 rounded text-white text-center">
+                        <form id="form-eval" class="form mb-0" action="/eval" method="post">
+                            <input name="sum" value="{{ summary }}" type="hidden">
+                            <input name="doc" value="{{ article }}" type="hidden">
+                            <h5>Evaluation</h5>
+                            <div class="form-group">
+                                <span class="custom-control custom-control-inline custom-radio">
+                                    <input id="eval-1" class="custom-control-input" type="radio" name="eval" value="1" />
+                                    <label for="eval-1" class="custom-control-label">1</label>
+                                </span>
+                                <span class="custom-control custom-control-inline custom-radio">
+                                    <input id="eval-2" class="custom-control-input" type="radio" name="eval" value="2" />
+                                    <label for="eval-2" class="custom-control-label">2</label>
+                                </span>
+                                <span class="custom-control custom-control-inline custom-radio">
+                                    <input id="eval-3" class="custom-control-input" type="radio" name="eval" value="3" />
+                                    <label for="eval-3" class="custom-control-label">3</label>
+                                </span>
+                                <span class="custom-control custom-control-inline custom-radio">
+                                    <input id="eval-4" class="custom-control-input" type="radio" name="eval" value="4" />
+                                    <label for="eval-4" class="custom-control-label">4</label>
+                                </span>
+                                <span class="custom-control custom-control-inline custom-radio">
+                                    <input id="eval-5" class="custom-control-input" type="radio" name="eval" value="5" />
+                                    <label for="eval-5" class="custom-control-label">5</label>
+                                </span>
                             </div>
-                        </div>
-                        <label for="summary">Evaluation</label>
-                        <div class="form-control text-center">
-
-                            <span class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="r0" name="eval" value="최악" />
-                                <label for="r0" class="form-check-label"> 최악</label>
-                            </span>
-                            <span class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="r1" name="eval" value="미흡" />
-                                <label for="r1" class="form-check-label"> 미흡</label>
-                            </span>
-                            <span class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="r2" name="eval" value="보통" checked />
-                                <label for="r2" class="form-check-label"> 보통</label>
-                            </span>
-                            <span class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="r3" name="eval" value="좋음" />
-                                <label for="r3" class="form-check-label"> 좋음</label>
-                            </span>
-                            <span class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="r4" name="eval" value="최고" />
-                                <label for="r4" class="form-check-label"> 최고</label>
-                            </span>
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input class="form-control" type="text" id="name" name="name">
-                        </div>
-                        <div class="form-group text-center">
-                            <button class="btn btn-primary" type="submit">Send</button>
-                        </div>
-                    </form>
+                            <div class="form-group mb-0">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" id="name" name="name"
+                                        placeholder="Insert your name">
+                                    <button class="btn btn-dark" type="button" onclick="submitForm()">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    {% endif %}
                 </div>
-            </div>
+            </article>
         </article>
+        <footer class="container fixed-bottom">
+            <div class="p-3 bg-white rounded-top border clearfix">
+                <form id="form-request" class="form mb-0" action="/" method="post">
+                    <input id="article" type="hidden" name="article">
+                    <b class="mr-3">Options</b>
+                    <span class="custom-control custom-checkbox custom-control-inline">
+                        <input class="custom-control-input" type="checkbox" name="option" value="pgn"
+                            id="option-pgn" {% if "pgn" in options %}checked{% endif %}>
+                        <label class="custom-control-label" for="option-pgn">PGN (Abst.)</label>
+                    </span>
+                    <span class="custom-control custom-checkbox custom-control-inline">
+                        <input class="custom-control-input" type="checkbox" name="option" value="tpgn"
+                            id="option-tpgn" {% if "tpgn" in options %}checked{% endif %}>
+                        <label class="custom-control-label" for="option-tpgn">TPGN (Abst.)</label>
+                    </span>
+                    <span class="custom-control custom-checkbox custom-control-inline">
+                        <input class="custom-control-input" type="checkbox" name="option" value="textrank"
+                            id="option-textrank" {% if "textrank" in options %}checked{% endif %}>
+                        <label class="custom-control-label" for="option-textrank">Textrank (Extr.)</label>
+                    </span>
+                    <button class="float-right btn btn-sm btn-primary" type="button" onclick="submitForm()">Summarize</button>
+                </form>
+            </div>
+        </footer>
     </div>
     <script src="{% static 'js/main.js' %}"></script>
 </body>

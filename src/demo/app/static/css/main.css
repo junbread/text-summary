@@ -1,27 +1,8 @@
-form {
-    /* Just to center the form on the page */
-    margin: 0 auto;
-    /* To see the outline of the form */
-    padding: 1em;
-    border: 1px solid #CCC;
-    border-radius: 1em;
-}
-form div + div {
-    margin-top: 1em;
-}
-textarea{
-    vertical-align=top;
-    /* box-sizing: padding-box; */
-    overflow:hidden;
-    /* demo only: */
-    font-size:14px;
-    display:block;
-    border-radius:10px;
-    border:6px solid #556677;
+textarea#article {
+    overflow: hidden;
     resize: none;
 }
-#summary{
-    word-break: break-all;
-    height: auto;
-    word-wrap: break-word;
+
+textarea#article:focus {
+    outline: none
 }
