@@ -29,7 +29,7 @@ def demo(request):
         options = request.POST.getlist('option', [])
         
         if len(article):
-            summary = summarizer.summarize(article)
+            summary = summarizer.summarize(article, options)
 
         return_object['article'] = article
         return_object['options'] = options
