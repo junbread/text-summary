@@ -1,81 +1,101 @@
 {% load static %}
 <html>
-    <head>
-        <title>문서 요약 테스트 페이지</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    </head>
-    <body>
 
-        <div class="text-center">
-            <h1>문서 요약 테스트 페이지</h1>
-            <h2>pointer-generator-network 방식</h2>
-        </div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <form class="form1" action="/" method="post" height = "auto">
+<head>
+    <!-- CSS Import -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <!--         <link rel="stylesheet" href="{% static 'css/main.css' %}">
+ -->
+    <title>Document Summarization Test Page</title>
+</head>
+
+<body>
+    <div class="container">
+        <header class="text-center m-5">
+            <h1>Document Summarization Test Page</h1>
+        </header>
+        <article class="content">
+            <div class="row">
+                <div class="col-6">
+                    <form class="form" action="/" method="post" height="auto">
                         <div class="form-group">
-                            <label for="document" class = "mb-3">Document</label>
-                            <textarea id="document" class="form-control form-control-" name="document" draggable="false">{{ document }}</textarea>
+                            <span class="float-right">
+                                <button class="btn btn-sm btn-primary" type="button" onclick="location.reload()">
+                                    <i class="fa fa-sync"></i>
+                                </button>
+                            </span>
+                            <h5>Target Article</h5>
+                            <textarea id="article" class="form-control" name="article" draggable="false">{{ article }}</textarea>
                         </div>
-                        <label for="document" class = "mb-3">Option</label>
-                        <div class="form-control text-center">
-                            <label><input type="checkbox" name="sum_opt" value ="trns" {{opt_trns_checked}}> Transformer</label>
-                            <label><input type="checkbox" name="sum_opt" value ="rnd" {{opt_rnd_checked}}> Random</label>
+                        <div class="form-group">
+                            <h5>Options</h5>
+                            <span class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" name="option" value="pgn" id="option-pgn">
+                                <label class="custom-control-label" for="option-pgn">Pointer-Generator Network (Abstractive)</label>
+                            </span>
+                            <span class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" name="option" value="tpgn" id="option-tpgn">
+                                <label class="custom-control-label" for="option-tpgn">Transformer PGN (Abstractive)</label>
+                            </span>
+                            <span class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" name="option" value="textrank" id="option-textrank">
+                                <label class="custom-control-label" for="option-textrank">Textrank (Extractive)</label>
+                            </span>
                         </div>
                         <div class="form-group text-center">
                             <button class="btn btn-primary" type="submit">Summarize</button>
                         </div>
                     </form>
                 </div>
-                <div class="col-lg-6">
-                    <form class="form2" action="/eval" method="post">
+                <div class="col-6">
+                    <form class="form" action="/eval" method="post">
+                        <input name="sum" value="{{ summary }}" type="hidden">
+                        <input name="doc" value="{{ document }}" type="hidden">
                         <div class="form-group">
                             <label for="summary" class="mb-3">Summary</label>
-                            <div id="summary" class="form-control input-group">{{ summary }}</div>
-                            <input name="sum" value="{{ summary }}" type="hidden">
-                            <input name="doc" value="{{ document }}" type="hidden">
+                            <div id="summary" class="form-control input-group">
+                                {% if summary.pgn is not None %}
+                                    <h6>summary (pointer-generator network)</h6>
+                                    {{ summary.pgn }}
+                                {% endif %}
+                                {% if summary.tpgn is not None %}
+                                    <h6>summary (transformer pgn)</h6>
+                                    {{ summary.pgn }}
+                                {% endif %}
+                                {% if summary.textrank is not None %}
+                                    <h6>summary (textrank)</h6>
+                                    {{ summary.pgn }}
+                                {% endif %}
+                            </div>
                         </div>
-                        {% if opt_trns %}
-                        <div class="form-group">
-                            <label for="summary_trns" class="mb-3">Summary_transformer</label>
-                            <div id="summary_trns" class="form-control input-group">{{ summary_trns }}</div>
-                        </div>
-                        {% endif %}
-                        {% if opt_rnd %}
-                        <div class="form-group">
-                            <label for="summary_rnd" class="mb-3">Summary_random</label>
-                            <div id="summary_rnd" class="form-control input-group">{{ summary_rnd }}</div>
-                        </div>
-                        {% endif %}
                         <label for="summary">Evaluation</label>
                         <div class="form-control text-center">
 
                             <span class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" id="r0" name="eval" value="최악" />
-                                <label for = "r0" class="form-check-label"> 최악</label>
+                                <label for="r0" class="form-check-label"> 최악</label>
                             </span>
                             <span class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" id="r1" name="eval" value="미흡" />
-                                <label for = "r1" class="form-check-label"> 미흡</label>
+                                <label for="r1" class="form-check-label"> 미흡</label>
                             </span>
                             <span class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="r2" name="eval" value="보통" checked/>
-                                <label for = "r2" class="form-check-label"> 보통</label>
+                                <input class="form-check-input" type="radio" id="r2" name="eval" value="보통" checked />
+                                <label for="r2" class="form-check-label"> 보통</label>
                             </span>
                             <span class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" id="r3" name="eval" value="좋음" />
-                                <label for = "r3" class="form-check-label"> 좋음</label>
+                                <label for="r3" class="form-check-label"> 좋음</label>
                             </span>
                             <span class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" id="r4" name="eval" value="최고" />
-                                <label for = "r4" class="form-check-label"> 최고</label>
+                                <label for="r4" class="form-check-label"> 최고</label>
                             </span>
                         </div>
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input class="form-control" type="text" id="name" name = "name">
+                            <input class="form-control" type="text" id="name" name="name">
                         </div>
                         <div class="form-group text-center">
                             <button class="btn btn-primary" type="submit">Send</button>
@@ -83,7 +103,9 @@
                     </form>
                 </div>
             </div>
-        </div>
-        <script src="{% static 'js/main.js' %}"></script>
-    </body>
+        </article>
+    </div>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
 </html>
