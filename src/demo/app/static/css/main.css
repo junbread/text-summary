@@ -1,8 +1,8 @@
-textarea#article {
+textarea#article-text {
     overflow: hidden;
     resize: none;
 }
 
-textarea#article:focus {
+textarea#article-text:focus {
     outline: none
 }
