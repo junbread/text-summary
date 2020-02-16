@@ -21,7 +21,7 @@ function autosize() {
 function submitForm() {
     var articleForm = document.querySelector('#form-request')
     var summary = document.querySelector('#summary')
-    var articleText = document.querySelector("#article-text").textContent
+    var articleText = document.querySelector("#article-text").value
 
     articleForm.article.value = articleText
     summary.textContent = "요약 중..."

@@ -1,3 +1,7 @@
+* {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
 textarea#article-text {
     overflow: hidden;
     resize: none;
