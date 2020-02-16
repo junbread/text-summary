@@ -5,6 +5,7 @@
     <!-- CSS Import -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <title>Document Summarization Test</title>
 </head>
@@ -23,14 +24,14 @@
                                 <a class="btn btn-sm btn-primary" href="/"><i class="fa fa-sync"></i></a>
                             </span>
                             <h5>Target Article</h5>
-                            <textarea id="article-text" class="form-control-plaintext overflow-hidden" placeholder="Input text here...">{{ article|default_if_none:''}}</textarea>
+                            <textarea id="article-text" class="form-control-plaintext overflow-hidden text-justify" placeholder="Input text here...">{{ article|default_if_none:''}}</textarea>
                         </div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <h5>Summary</h5>
-                        <div id="summary" class="form-control-plaintext">
+                        <div id="summary" class="form-control-plaintext text-justify">
                             {% if summary is None %}
                             <span>여기에 요약문이 표시됩니다.</span>
                             {% endif %}
@@ -56,23 +57,23 @@
                             <h5>Evaluation</h5>
                             <div class="form-group">
                                 <span class="custom-control custom-control-inline custom-radio">
-                                    <input id="eval-1" class="custom-control-input" type="radio" name="eval" value="1" />
+                                    <input id="eval-1" class="custom-control-input" type="radio" name="score" value="1" />
                                     <label for="eval-1" class="custom-control-label">1</label>
                                 </span>
                                 <span class="custom-control custom-control-inline custom-radio">
-                                    <input id="eval-2" class="custom-control-input" type="radio" name="eval" value="2" />
+                                    <input id="eval-2" class="custom-control-input" type="radio" name="score" value="2" />
                                     <label for="eval-2" class="custom-control-label">2</label>
                                 </span>
                                 <span class="custom-control custom-control-inline custom-radio">
-                                    <input id="eval-3" class="custom-control-input" type="radio" name="eval" value="3" />
+                                    <input id="eval-3" class="custom-control-input" type="radio" name="score" value="3" />
                                     <label for="eval-3" class="custom-control-label">3</label>
                                 </span>
                                 <span class="custom-control custom-control-inline custom-radio">
-                                    <input id="eval-4" class="custom-control-input" type="radio" name="eval" value="4" />
+                                    <input id="eval-4" class="custom-control-input" type="radio" name="score" value="4" />
                                     <label for="eval-4" class="custom-control-label">4</label>
                                 </span>
                                 <span class="custom-control custom-control-inline custom-radio">
-                                    <input id="eval-5" class="custom-control-input" type="radio" name="eval" value="5" />
+                                    <input id="eval-5" class="custom-control-input" type="radio" name="score" value="5" />
                                     <label for="eval-5" class="custom-control-label">5</label>
                                 </span>
                             </div>
@@ -80,7 +81,7 @@
                                 <div class="input-group">
                                     <input class="form-control" type="text" id="name" name="name"
                                         placeholder="Insert your name">
-                                    <button class="btn btn-dark" type="button" onclick="submitForm()">Send</button>
+                                    <button class="btn btn-dark" type="submit">Send</button>
                                 </div>
                             </div>
                         </form>
