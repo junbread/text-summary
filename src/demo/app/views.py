@@ -5,12 +5,14 @@ from src.summarize.summarize import Summarizer
 from src.dataset.util import ExamplePicker
 
 import time
+import json
 from pathlib import Path
 
 project_root = Path(__file__).parent.parent.parent.parent
 
 summarizer = Summarizer()
-article_picker = ExamplePicker(data_path = project_root.joinpath('data','original').as_posix())
+article_picker = ExamplePicker(data_path=project_root.joinpath('data', 'original').as_posix())
+
 
 def demo(request):
     return_object = {
@@ -18,16 +20,16 @@ def demo(request):
         'summary': None,
         'options': ["pgn", "textrank"]
     }
-    
+
     if request.method == 'GET':
-        article = "" # article selection module
+        article = ""  # article selection module
 
         return_object['article'] = article_picker.pick_random_article()
 
     if request.method == 'POST':
         article = request.POST.get('article', '')
         options = request.POST.getlist('option', [])
-        
+
         if len(article):
             summary = summarizer.summarize(article, options)
 
@@ -41,8 +43,10 @@ def demo(request):
 def eval(request):
     if request.method == 'POST':
         record = Eval()
-        
-        record.score = request.POST['score']
+        print(request.POST.keys())
+        score = {key.replace('score-',''): request.POST[key] for key in request.POST.keys() if key.startswith('score')}
+        print(score)
+        record.score = json.dumps(score)
         record.name = request.POST['name']
         record.sum = request.POST['sum']
         record.doc = request.POST['doc']
