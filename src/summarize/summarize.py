@@ -19,6 +19,7 @@ class Summarizer(object):
         preprocessed_text = preprocess.process(text)
 
         pgn_result = None
+        baseline_result = None
         textrank_result = None
 
         #if 'pgn' in options:
