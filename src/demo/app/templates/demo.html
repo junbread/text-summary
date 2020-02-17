@@ -35,58 +35,83 @@
                             {% if summary is None %}
                             <span>여기에 요약문이 표시됩니다.</span>
                             {% endif %}
-                            {% if summary.pgn is not None %}
-                            <h6>pointer-generator network</h6>
-                            {{ summary.pgn }}
-                            {% endif %}
-                            {% if summary.tpgn is not None %}
-                            <h6>transformer pgn</h6>
-                            {{ summary.tgpn }}
-                            {% endif %}
-                            {% if summary.textrank is not None %}
-                            <h6>textrank</h6>
-                            {{ summary.textrank }}
+                            {% if summary is not None %}
+                            <form id="form-eval" class="form mb-0" action="eval" method="POST">
+                                <input name="sum" value="{{ summary }}" type="hidden">
+                                <input name="doc" value="{{ article }}" type="hidden">
+                                {% if summary.pgn is not None %}
+                                <h6>pointer-generator network</h6>
+                                <div class="row m-0">
+                                    <div class="col-2 p-0">
+                                        <span class="badge badge-danger">bad</span>
+                                    </div>
+                                    <div class="col-8 p-0">
+                                        <input class="custom-range" type="range" name="score-pgn" min="0" max="4" step="1">
+                                    </div>
+                                    <div class="col-2 p-0 text-right">
+                                        <span class="badge badge-success">good</span>
+                                    </div>
+                                </div>
+                                <p>{{ summary.pgn }}</p>
+                                {% endif %}
+                                {% if summary.baseline is not None %}
+                                <h6>pointer-generator network (baseline)</h6>
+                                <div class="row m-0">
+                                    <div class="col-2 p-0">
+                                        <span class="badge badge-danger">bad</span>
+                                    </div>
+                                    <div class="col-8 p-0">
+                                        <input class="custom-range" type="range" name="score-baseline" min="0" max="4" step="1">
+                                    </div>
+                                    <div class="col-2 p-0 text-right">
+                                        <span class="badge badge-success">good</span>
+                                    </div>
+                                </div>
+                                <p>{{ summary.baseline }}</p>
+                                {% endif %}
+                                {% if summary.tpgn is not None %}
+                                <h6>transformer pgn</h6>
+                                <div class="row m-0">
+                                    <div class="col-2 p-0">
+                                        <span class="badge badge-danger">bad</span>
+                                    </div>
+                                    <div class="col-8 p-0">
+                                        <input class="custom-range" type="range" name="score-tpgn" min="0" max="4" step="1">
+                                    </div>
+                                    <div class="col-2 p-0 text-right">
+                                        <span class="badge badge-success">good</span>
+                                    </div>
+                                </div>
+                                <p>{{ summary.tgpn }}</p>
+                                {% endif %}
+                                {% if summary.textrank is not None %}
+                                <h6>textrank</h6>
+                                <div class="row m-0">
+                                    <div class="col-2 p-0">
+                                        <span class="badge badge-danger">bad</span>
+                                    </div>
+                                    <div class="col-8 p-0">
+                                        <input class="custom-range" type="range" name="score-textrank" min="0" max="4" step="1">
+                                    </div>
+                                    <div class="col-2 p-0 text-right">
+                                        <span class="badge badge-success">good</span>
+                                    </div>
+                                </div>
+                                <p>{{ summary.textrank }}</p>
+                                <div class="form-group mb-0">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" id="name" name="name"
+                                            placeholder="Insert your name">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary" type="submit">Send</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </form>
                             {% endif %}
                         </div>
                     </div>
-                    {% if summary is not None %}
-                    <div class="form bg-secondary p-3 rounded text-white text-center">
-                        <form id="form-eval" class="form mb-0" action="/eval" method="post">
-                            <input name="sum" value="{{ summary }}" type="hidden">
-                            <input name="doc" value="{{ article }}" type="hidden">
-                            <h5>Evaluation</h5>
-                            <div class="form-group">
-                                <span class="custom-control custom-control-inline custom-radio">
-                                    <input id="eval-1" class="custom-control-input" type="radio" name="score" value="1" />
-                                    <label for="eval-1" class="custom-control-label">1</label>
-                                </span>
-                                <span class="custom-control custom-control-inline custom-radio">
-                                    <input id="eval-2" class="custom-control-input" type="radio" name="score" value="2" />
-                                    <label for="eval-2" class="custom-control-label">2</label>
-                                </span>
-                                <span class="custom-control custom-control-inline custom-radio">
-                                    <input id="eval-3" class="custom-control-input" type="radio" name="score" value="3" />
-                                    <label for="eval-3" class="custom-control-label">3</label>
-                                </span>
-                                <span class="custom-control custom-control-inline custom-radio">
-                                    <input id="eval-4" class="custom-control-input" type="radio" name="score" value="4" />
-                                    <label for="eval-4" class="custom-control-label">4</label>
-                                </span>
-                                <span class="custom-control custom-control-inline custom-radio">
-                                    <input id="eval-5" class="custom-control-input" type="radio" name="score" value="5" />
-                                    <label for="eval-5" class="custom-control-label">5</label>
-                                </span>
-                            </div>
-                            <div class="form-group mb-0">
-                                <div class="input-group">
-                                    <input class="form-control" type="text" id="name" name="name"
-                                        placeholder="Insert your name">
-                                    <button class="btn btn-dark" type="submit">Send</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    {% endif %}
                 </div>
             </article>
         </article>
@@ -94,21 +119,30 @@
             <div class="p-3 bg-white rounded-top border clearfix">
                 <form id="form-request" class="form mb-0" action="/" method="post">
                     <input id="article" type="hidden" name="article">
-                    <b class="mr-3">Options</b>
+                    <b>Options</b>
+                    <span class="splitter ml-3 mr-3"></span>
+                    <b class="mr-3">Abstractive</b>
                     <span class="custom-control custom-checkbox custom-control-inline">
                         <input class="custom-control-input" type="checkbox" name="option" value="pgn"
                             id="option-pgn" {% if "pgn" in options %}checked{% endif %}>
-                        <label class="custom-control-label" for="option-pgn">PGN (Abst.)</label>
+                        <label class="custom-control-label" for="option-pgn">PGN</label>
                     </span>
                     <span class="custom-control custom-checkbox custom-control-inline">
+                        <input class="custom-control-input" type="checkbox" name="option" value="baseline"
+                            id="option-baseline" {% if "baseline" in options %}checked{% endif %}>
+                        <label class="custom-control-label" for="option-baseline">PGN-baseline</label>
+                    </span>
+                    <span class="custom-control custom-checkbox custom-control-inline mr-0">
                         <input class="custom-control-input" type="checkbox" name="option" value="tpgn"
                             id="option-tpgn" {% if "tpgn" in options %}checked{% endif %}>
-                        <label class="custom-control-label" for="option-tpgn">TPGN (Abst.)</label>
+                        <label class="custom-control-label" for="option-tpgn">TPGN</label>
                     </span>
+                    <span class="splitter ml-3 mr-3"></span>
+                    <b class="mr-3">Extractive</b>
                     <span class="custom-control custom-checkbox custom-control-inline">
                         <input class="custom-control-input" type="checkbox" name="option" value="textrank"
                             id="option-textrank" {% if "textrank" in options %}checked{% endif %}>
-                        <label class="custom-control-label" for="option-textrank">Textrank (Extr.)</label>
+                        <label class="custom-control-label" for="option-textrank">Textrank</label>
                     </span>
                     <button class="float-right btn btn-sm btn-primary" type="button" onclick="submitForm()">Summarize</button>
                 </form>
