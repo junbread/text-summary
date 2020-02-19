@@ -1,6 +1,6 @@
 from . import preprocess
 
-from .pgn.util import Decoder as PGNDecoder
+# from .pgn.util import Decoder as PGNDecoder
 from .textrank.util import Decoder as TextrankDecoder
 from .baseline.util import Decoder as BaselineDecoder
 
@@ -32,7 +32,7 @@ class Summarizer(object):
             textrank_result = self.textrank_decoder.decode(preprocessed_text)
         
         return {
-        #    'pgn': pgn_result,
+            'pgn': pgn_result,
             'baseline': baseline_result,
             'textrank': textrank_result
         }

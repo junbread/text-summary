@@ -70,10 +70,9 @@ def default_params():
     project_root = Path(__file__).parent.parent.parent.parent
 
     params = {}
-    params["data_path"] = project_root.joinpath("data", "preprocessed-tf1", "chunked", "train_*").as_posix()
-    params["vocab_path"] = project_root.joinpath("data", "preprocessed-tf1", "vocab").as_posix()
+    params["vocab_path"] = project_root.joinpath("data", "preprocessed", "vocab").as_posix()
     params["mode"] = "decode"
-    params["exp_name"] = "model-kor"
+    params["exp_name"] = "model"
     params["log_root"] = project_root.joinpath("src", "summarize", "baseline", params["exp_name"]).as_posix()
 
     params["hidden_dim"] = 256
