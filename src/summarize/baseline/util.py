@@ -73,16 +73,16 @@ def default_params():
     params["data_path"] = project_root.joinpath("data", "preprocessed-tf1", "chunked", "train_*").as_posix()
     params["vocab_path"] = project_root.joinpath("data", "preprocessed-tf1", "vocab").as_posix()
     params["mode"] = "decode"
-    params["exp_name"] = "exp-textrank"
+    params["exp_name"] = "model-kor"
     params["log_root"] = project_root.joinpath("src", "summarize", "baseline", params["exp_name"]).as_posix()
 
     params["hidden_dim"] = 256
     params["emb_dim"] = 128
     params["batch_size"] = 4
-    params["max_enc_steps"] = 400
-    params["max_dec_steps"] = 200
+    params["max_enc_steps"] = 2000
+    params["max_dec_steps"] = 300
     params["beam_size"] = 4
-    params["min_dec_steps"] = 100
+    params["min_dec_steps"] = 35
     params["vocab_size"] = 50000
     params["lr"] = 0.15
     params["adagrad_init_acc"] = 0.1
