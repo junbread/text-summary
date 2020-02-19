@@ -45,7 +45,28 @@ export CLASSPATH=$CLASSPATH:path/to/corenlp/stanford-corenlp-(version number).ja
 
 ## Download dataset (& pretrained model)
 
-Not yed prepared (I will add as soon as possible)
+Since datasets are too large to upload on Github, the files are uploaded on Google Drive. Download with links below:
+
+* [Korean Dataset](https://drive.google.com/open?id=13zba2ti0qgTCEvHXQJO87NgDqe9eyT3f) (brought from BigKinds news data using [news-crawler](https://github.com/junbread/news-crawler))
+* [English Dataset](https://drive.google.com/open?id=16MWCEySVq_39OhPrIYC6kDh0GcYlqmhA) (brought from CNN/Dailymail dataset, using [cnn-dailymail](https://github.com/abisee/cnn-dailymail))
+* [Korean Pretrained Model](https://drive.google.com/open?id=14ksM6g6LojeY3ee1i9A_4t3W_VXvxfew)
+* [English Pretrained Model](https://drive.google.com/open?id=1gyOL83VKaT3JMzJceEoL--xLk95EiaJ_) (brought from [here](https://github.com/abisee/pointer-generator#looking-for-pretrained-model))
+
+### Extract data
+
+Dataset location
+
+```bash
+project-root/data/
+```
+
+Model location
+
+```bash
+project-root/src/summarize/baseline/model/
+```
+
+Note that you have to extract content only. **Do not create subdirectory** under the location.
 
 ## How to run the demo
 
