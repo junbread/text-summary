@@ -2,11 +2,19 @@
     font-family: 'Nanum Gothic', sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
 textarea#article-text {
     overflow: hidden;
     resize: none;
 }
 
 textarea#article-text:focus {
-    outline: none
+    outline: none;
+}
+
+.splitter {
+    border-right: 2px solid lightgrey
 }

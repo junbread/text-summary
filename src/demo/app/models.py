@@ -4,7 +4,7 @@ from django.utils import timezone
 
 
 class Eval(models.Model):
-    score = models.IntegerField()
+    score = models.TextField()
     name = models.CharField(max_length=200)
     sum = models.TextField()
     doc = models.TextField()
