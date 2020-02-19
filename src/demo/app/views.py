@@ -18,7 +18,7 @@ def demo(request):
     return_object = {
         'article': None,
         'summary': None,
-        'options': ["pgn", "textrank"]
+        'options': ["baseline", "textrank"]
     }
 
     if request.method == 'GET':

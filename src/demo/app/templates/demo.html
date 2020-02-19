@@ -55,7 +55,7 @@
                                 <p>{{ summary.pgn }}</p>
                                 {% endif %}
                                 {% if summary.baseline is not None %}
-                                <h6>pointer-generator network (baseline)</h6>
+                                <h6>pointer-generator network</h6>
                                 <div class="row m-0">
                                     <div class="col-2 p-0">
                                         <span class="badge badge-danger">bad</span>
@@ -122,21 +122,21 @@
                     <b>Options</b>
                     <span class="splitter ml-3 mr-3"></span>
                     <b class="mr-3">Abstractive</b>
-                    <span class="custom-control custom-checkbox custom-control-inline">
+                    <!-- <span class="custom-control custom-checkbox custom-control-inline">
                         <input class="custom-control-input" type="checkbox" name="option" value="pgn"
                             id="option-pgn" {% if "pgn" in options %}checked{% endif %}>
                         <label class="custom-control-label" for="option-pgn">PGN</label>
-                    </span>
+                    </span> -->
                     <span class="custom-control custom-checkbox custom-control-inline">
                         <input class="custom-control-input" type="checkbox" name="option" value="baseline"
                             id="option-baseline" {% if "baseline" in options %}checked{% endif %}>
-                        <label class="custom-control-label" for="option-baseline">PGN-baseline</label>
+                        <label class="custom-control-label" for="option-baseline">PGN</label>
                     </span>
-                    <span class="custom-control custom-checkbox custom-control-inline mr-0">
+                    <!-- <span class="custom-control custom-checkbox custom-control-inline mr-0">
                         <input class="custom-control-input" type="checkbox" name="option" value="tpgn"
                             id="option-tpgn" {% if "tpgn" in options %}checked{% endif %}>
                         <label class="custom-control-label" for="option-tpgn">TPGN</label>
-                    </span>
+                    </span> -->
                     <span class="splitter ml-3 mr-3"></span>
                     <b class="mr-3">Extractive</b>
                     <span class="custom-control custom-checkbox custom-control-inline">
