@@ -5,5 +5,6 @@ from django.contrib import admin
 urlpatterns = [
     path('', views.demo, name='demo'),
     path('eval', views.eval, name='eval'),
-    path('admin/', admin.site.urls)
+    path('score', views.avg_eval, name='score_eval'),
+    path('admin/', admin.site.urls),
 ]

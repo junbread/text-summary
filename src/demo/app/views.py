@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
+
 from .models import Eval
 
 from src.summarize.summarize import Summarizer
@@ -53,3 +55,12 @@ def eval(request):
         record.save()
 
     return redirect('demo')
+
+def avg_eval(request):
+    records = Eval.objects.all()
+    scores = [json.loads(r.score) for r in records]
+
+    score_pgn = sum([int(s['baseline']) for s in scores]) / len(scores)
+    score_textrank = sum([int(s['textrank']) for s in scores]) / len(scores)
+
+    return HttpResponse("score_pgn: {} score_textrank: {}".format(score_pgn, score_textrank))
