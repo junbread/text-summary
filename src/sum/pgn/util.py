@@ -67,13 +67,11 @@ class Decoder(object):
 
 def default_params():
 
-    project_root = Path(__file__).parent.parent.parent.parent
-
     params = {}
-    params["vocab_path"] = project_root.joinpath("data", "preprocessed", "vocab").as_posix()
     params["mode"] = "decode"
     params["exp_name"] = "model"
-    params["log_root"] = project_root.joinpath("src", "sum", "pgn", params["exp_name"]).as_posix()
+    params["vocab_path"] = Path(__file__).joinpath("data", "vocab").as_posix()
+    params["log_root"] = Path(__file__).joinpath(params["exp_name"]).as_posix()
 
     params["hidden_dim"] = 256
     params["emb_dim"] = 128
