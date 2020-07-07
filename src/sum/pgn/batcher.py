@@ -2,7 +2,7 @@ import time
 import numpy as np
 import tensorflow as tf
 
-from . import data
+from pgn import data
 
 
 class Example(object):

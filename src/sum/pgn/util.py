@@ -9,11 +9,11 @@ import json
 from collections import namedtuple
 from pathlib import Path
 
-from .data import Vocab
-from .model import SummarizationModel
-from .batcher import Example, Batch
-from . import beam_search
-from . import data
+from pgn.data import Vocab
+from pgn.model import SummarizationModel
+from pgn.batcher import Example, Batch
+from pgn import beam_search
+from pgn import data
 
 
 class Decoder(object):
@@ -73,7 +73,7 @@ def default_params():
     params["vocab_path"] = project_root.joinpath("data", "preprocessed", "vocab").as_posix()
     params["mode"] = "decode"
     params["exp_name"] = "model"
-    params["log_root"] = project_root.joinpath("src", "summarize", "baseline", params["exp_name"]).as_posix()
+    params["log_root"] = project_root.joinpath("src", "sum", "pgn", params["exp_name"]).as_posix()
 
     params["hidden_dim"] = 256
     params["emb_dim"] = 128

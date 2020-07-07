@@ -54,36 +54,6 @@
                                 </div>
                                 <p>{{ summary.pgn }}</p>
                                 {% endif %}
-                                {% if summary.baseline is not None %}
-                                <h6>생성적 요약 (pointer generator network)</h6>
-                                <div class="row m-0">
-                                    <div class="col-2 p-0">
-                                        <span class="badge badge-danger">bad</span>
-                                    </div>
-                                    <div class="col-8 p-0">
-                                        <input class="custom-range" type="range" name="score-baseline" min="0" max="4" step="1">
-                                    </div>
-                                    <div class="col-2 p-0 text-right">
-                                        <span class="badge badge-success">good</span>
-                                    </div>
-                                </div>
-                                <p>{{ summary.baseline }}</p>
-                                {% endif %}
-                                {% if summary.tpgn is not None %}
-                                <h6>transformer pgn</h6>
-                                <div class="row m-0">
-                                    <div class="col-2 p-0">
-                                        <span class="badge badge-danger">bad</span>
-                                    </div>
-                                    <div class="col-8 p-0">
-                                        <input class="custom-range" type="range" name="score-tpgn" min="0" max="4" step="1">
-                                    </div>
-                                    <div class="col-2 p-0 text-right">
-                                        <span class="badge badge-success">good</span>
-                                    </div>
-                                </div>
-                                <p>{{ summary.tgpn }}</p>
-                                {% endif %}
                                 {% if summary.textrank is not None %}
                                 <h6 class="mt-3">문장 추출식 요약 (textrank)</h6>
                                 <div class="row m-0">
@@ -122,21 +92,11 @@
                     <b>Options</b>
                     <span class="splitter ml-3 mr-3"></span>
                     <b class="mr-3">Abstractive</b>
-                    <!-- <span class="custom-control custom-checkbox custom-control-inline">
+                    <span class="custom-control custom-checkbox custom-control-inline">
                         <input class="custom-control-input" type="checkbox" name="option" value="pgn"
                             id="option-pgn" {% if "pgn" in options %}checked{% endif %}>
                         <label class="custom-control-label" for="option-pgn">PGN</label>
-                    </span> -->
-                    <span class="custom-control custom-checkbox custom-control-inline">
-                        <input class="custom-control-input" type="checkbox" name="option" value="baseline"
-                            id="option-baseline" {% if "baseline" in options %}checked{% endif %}>
-                        <label class="custom-control-label" for="option-baseline">PGN</label>
                     </span>
-                    <!-- <span class="custom-control custom-checkbox custom-control-inline mr-0">
-                        <input class="custom-control-input" type="checkbox" name="option" value="tpgn"
-                            id="option-tpgn" {% if "tpgn" in options %}checked{% endif %}>
-                        <label class="custom-control-label" for="option-tpgn">TPGN</label>
-                    </span> -->
                     <span class="splitter ml-3 mr-3"></span>
                     <b class="mr-3">Extractive</b>
                     <span class="custom-control custom-checkbox custom-control-inline">

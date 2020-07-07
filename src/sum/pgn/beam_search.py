@@ -19,7 +19,7 @@
 import tensorflow as tf
 import numpy as np
 
-from . import data
+from pgn import data
 
 class Hypothesis(object):
   """Class to represent a hypothesis during beam search. Holds all the information needed for the hypothesis."""

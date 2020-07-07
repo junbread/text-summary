@@ -2,8 +2,9 @@ import tensorflow as tf
 import glob
 import os
 import ntpath
-from . import data_helper
-from .vocab import Vocab
+
+import data_helper
+from vocab import Vocab
 
 
 def _parse_function(example_proto):

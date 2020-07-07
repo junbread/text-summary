@@ -22,7 +22,7 @@ import numpy as np
 import tensorflow as tf
 from tensorboard.plugins import projector
 
-from .attention_decoder import attention_decoder
+from pgn.attention_decoder import attention_decoder
 
 class SummarizationModel(object):
   """A class to represent a sequence-to-sequence model for text summarization. Supports both baseline mode, pointer-generator mode, and coverage"""
