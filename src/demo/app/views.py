@@ -8,12 +8,13 @@ from summarize import Summarizer
 
 import time
 import json
+import os
 from pathlib import Path
 
-project_root = Path(__file__).parent.parent.parent.parent
+project_root = Path(os.getcwd())
 
 summarizer = Summarizer()
-article_picker = ExamplePicker(data_path=project_root.joinpath('data', 'original').as_posix())
+article_picker = ExamplePicker(data_path=project_root.joinpath('data').as_posix())
 
 
 def demo(request):

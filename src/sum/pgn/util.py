@@ -70,8 +70,8 @@ def default_params():
     params = {}
     params["mode"] = "decode"
     params["exp_name"] = "model"
-    params["vocab_path"] = Path(__file__).joinpath("data", "vocab").as_posix()
-    params["log_root"] = Path(__file__).joinpath(params["exp_name"]).as_posix()
+    params["vocab_path"] = Path(__file__).parent.joinpath("data", "vocab").as_posix()
+    params["log_root"] = Path(__file__).parent.joinpath(params["exp_name"]).as_posix()
 
     params["hidden_dim"] = 256
     params["emb_dim"] = 128
