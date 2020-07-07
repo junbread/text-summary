@@ -1,0 +1,5 @@
+hanja
+textrankr
+django
+tensorflow>=2.0.0
+koalanlp
