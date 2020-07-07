@@ -31,7 +31,11 @@ koalanlp
 
 ## Setup
 
-**NOTE**: Automated Bash script is included. Now you just need to run `run_demo.sh` only.
+### **NOTE**
+
+- Automated bash script is included. Now you just need to run `run_demo.sh` only.
+- I recommend to use python virtual environment `venv` to isolate the development environment.
+
 
 Before running demo page server, you should export your working directory as `PYTHONPATH`. Try with this:
 
@@ -60,14 +64,15 @@ Since datasets are too large to upload on Github, the files are uploaded on Goog
 
 Dataset location
 
-```bash
-project-root/data/
+```plaintext
+original: project-root/data/
+preprocessed: project-root/src/sum/pgn/data/
 ```
 
 Model location
 
 ```bash
-project-root/src/summarize/pgn/model/
+project-root/src/sum/pgn/model/
 ```
 
 Note that you have to extract content only. **Do not create subdirectory** under the location.
