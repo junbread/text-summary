@@ -24,10 +24,14 @@ koalanlp
 
 ### Other requirements
 
+**NOTE**: Now all requirements are included. No need to download.
+
 * [khaiii](https://github.com/kakao/khaiii)
 * [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/)
 
 ## Setup
+
+**NOTE**: Automated Bash script is included. Now you just need to run `run_demo.sh` only.
 
 Before running demo page server, you should export your working directory as `PYTHONPATH`. Try with this:
 
@@ -63,7 +67,7 @@ project-root/data/
 Model location
 
 ```bash
-project-root/src/summarize/baseline/model/
+project-root/src/summarize/pgn/model/
 ```
 
 Note that you have to extract content only. **Do not create subdirectory** under the location.

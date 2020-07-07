@@ -2,7 +2,6 @@
 /venv/
 **/.java/
 **/__pycache__/
-/src/summarize2/
 .*
 **/data/
 *.pyc
